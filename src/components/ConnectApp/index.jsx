@@ -1,9 +1,10 @@
-import React from 'react'
-import {Button,Container,Logo,Text,Wrapper} from "../../Style/ConnectAppStyle"
+import React from 'react';
+import { Button, Container, Logo, Text, Wrapper } from "../../Style/ConnectAppStyle";
+
 const ConnectApp = () => {
     const handleClick = async () => {
-        const client_id = "76397f08f5bf42c5a152f1c04d79a4c9";
-        const redirect_uri = "https://spotify-ivory-six.vercel.app/"  || "https://spotify-surajtamattas-projects.vercel.app/";
+        const client_id = process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_ID;
+        const redirect_uri = process.env.NEXT_PUBLIC_SPOTIFY_REDIRECT_URI;
         const api_uri = "https://accounts.spotify.com/authorize";
 
         const scope = [
@@ -20,23 +21,28 @@ const ConnectApp = () => {
           "playlist-modify-public",
           "playlist-read-private",
           "app-remote-control",
-          "streaming",
-          //"playlist-read-collaborative"
+          "streaming"
         ];
+
+        if (!client_id || !redirect_uri) {
+            console.error("Client ID or Redirect URI is missing.");
+            return;
+        }
+
         window.location.href = `${api_uri}?client_id=${client_id}&redirect_uri=${redirect_uri}&scope=${scope.join(
           " "
         )}&response_type=token&show_dialog=true`;
-      };
-      return (
-        <Container>
-            <Wrapper>
-                <Logo/>
-                <Text>Spotify</Text>
-            </Wrapper>
-          
-          <Button onClick={handleClick}>Connect Spotify</Button>
-        </Container>
-      );
-}
+    };
 
-export default ConnectApp
+    return (
+      <Container>
+          <Wrapper>
+              <Logo />
+              <Text>Spotify</Text>
+          </Wrapper>
+          <Button onClick={handleClick}>Connect Spotify</Button>
+      </Container>
+    );
+};
+
+export default ConnectApp;
