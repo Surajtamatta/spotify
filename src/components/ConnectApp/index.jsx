@@ -3,7 +3,7 @@ import {Button,Container,Logo,Text,Wrapper} from "../../Style/ConnectAppStyle"
 const ConnectApp = () => {
     const handleClick = async () => {
         const client_id = "76397f08f5bf42c5a152f1c04d79a4c9";
-        const redirect_uri = "https://spotify-ivory-six.vercel.app/"  || "https://spotify-surajtamattas-projects.vercel.app/;
+        const redirect_uri = "https://spotify-ivory-six.vercel.app/"  || "https://spotify-surajtamattas-projects.vercel.app/";
         const api_uri = "https://accounts.spotify.com/authorize";
 
         const scope = [
